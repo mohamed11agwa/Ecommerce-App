@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin-style.css">
+
+</head>
+<body>
+  <h2>Add New User</h2>
+<form id="addUserForm">
+  <input type="text" id="newUserid" placeholder="User ID" required>
+  <input type="text" id="newUsername" placeholder="Username" required>
+  <input type="password" id="newPassword" placeholder="Password" required>
+  <select id="newRole" required>
+    <option value="">Select Role</option>
+    <option value="admin">Admin</option>
+    <option value="seller">Seller</option>
+    <option value="customer">Customer</option>
+  </select>
+  <button type="submit">Add User</button>
+</form>
+<hr>
+<h2>Edit User</h2>
+<form id="editUserForm" style="display:none;">
+  <input type="hidden" id="editUserId">
+  <input type="text" id="editUsername" placeholder="Username" required>
+  <input type="password" id="editPassword" placeholder="Password" required>
+  <select id="editRole" required>
+    <option value="">Select Role</option>
+    <option value="admin">Admin</option>
+    <option value="seller">Seller</option>
+    <option value="customer">Customer</option>
+  </select>
+  <button type="submit">Update User</button>
+  <button type="button" onclick="cancelEdit()">Cancel</button>
+</form>
+<hr>
+
+  <h1>User Management</h1>
+
+  <table id="usersTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h2>Product Management</h2>
+<table id="productsTable">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+  <script src="admin-js.js"></script>
+
+</body>
+</html>

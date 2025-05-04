@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seller Dashboard</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 8px; border: 1px solid #ccc; }
+    input, textarea, select { margin: 5px; padding: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Seller Dashboard</h1>
+
+  <h2>Add New Product</h2>
+  <form id="addProductForm">
+    <input type="text" id="productID" placeholder="Product Id" required><br>
+    <input type="text" id="name" placeholder="Product Name" required><br>
+    <textarea id="description" placeholder="Description" required></textarea><br>
+    <input type="number" id="price" placeholder="Price" step="0.01" required><br>
+    <button type="submit">Add Product</button>
+  </form>
+
+  <h2>Your Products</h2>
+  <table id="productsTable">
+    <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>Description</th><th>Price</th><th>Status</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || user.role !== "seller") {
+      window.location.href = "index.html";
+    }
+
+    const form = document.getElementById("addProductForm");
+    const tbody = document.querySelector("#productsTable tbody");
+
+    function loadMyProducts() {
+      fetch("http://localhost:3000/products?userId=" + user.id)
+        .then(res => res.json())
+        .then(products => {
+          tbody.innerHTML = "";
+          products.forEach(p => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${p.id}</td>
+              <td>${p.name}</td>
+              <td>${p.description}</td>
+              <td>$${p.price}</td>
+              <td>${p.status}</td>
+              <td><button onclick="deleteProduct(${p.id})">Delete</button></td>
+            `;
+            tbody.appendChild(row);
+          });
+        });
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      let id=document.getElementById("productID").value.trim();
+
+      let name = document.getElementById("name").value.trim();
+      let description = document.getElementById("description").value.trim();
+      let price = parseFloat(document.getElementById("price").value);
+
+      fetch("http://localhost:3000/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id,
+          name,
+          description,
+          price,
+          status: "pending", 
+          userId: user.id
+        })
+      })
+      .then(() => {
+        form.reset();
+        loadMyProducts();
+      });
+    });
+
+    function deleteProduct(id) {
+      if (confirm("Delete this product?")) {
+        fetch(`http://localhost:3000/products/${id}`, {
+          method: "DELETE"
+        }).then(() => loadMyProducts());
+      }
+    }
+
+    loadMyProducts();
+  </script>
+</body>
+</html>

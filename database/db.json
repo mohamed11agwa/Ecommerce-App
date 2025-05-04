@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "seller1",
+      "password": "seller123",
+      "role": "seller"
+    },
+    {
+      "id": "3",
+      "username": "ahmed",
+      "password": "123456",
+      "role": "customer"
+    },
+    {
+      "id": "4",
+      "username": "mohamed attia",
+      "password": "1234567",
+      "role": "admin"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "T-shirt",
+      "description": "Cotton T-shirt",
+      "price": 29.99,
+      "status": "approved"
+    },
+    {
+      "id": "4",
+      "name": "phone",
+      "description": "oppo",
+      "price": 100,
+      "status": "approved",
+      "userId": "2"
+    }
+  ],
+  "orders": [],
+  "reviews": []
+}
