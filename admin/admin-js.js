@@ -171,5 +171,59 @@ function updateProductStatus(id, status) {
     .then(() => loadProducts());
 }
 loadProducts();
+///////////////////////////order Managment////////////////////////////////////
+function loadOrders() {
+  fetch("http://localhost:3000/orders")
+    .then(res => res.json())
+    .then(async orders => {
+      const tbody = document.querySelector("#ordersTable tbody");
+      tbody.innerHTML = "";
+
+      for (let order of orders) {
+        const user = await fetch(`http://localhost:3000/users/${order.userId}`).then(r => r.json());
+
+        let productListHTML = "";
+        for (let item of order.items) {
+          const product = await fetch(`http://localhost:3000/products/${item.productId}`).then(r => r.json());
+          productListHTML += `${product.name} (x${item.quantity})<br>`;
+        }
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${order.id}</td>
+          <td>${user.username}</td>
+          <td>${productListHTML}</td>
+          <td>${order.status}</td>
+          <td>
+            <select onchange="updateOrderStatus(${order.id}, this.value)">
+              <option value="pending" ${order.status === "pending" ? "selected" : ""}>Pending</option>
+              <option value="processing" ${order.status === "processing" ? "selected" : ""}>Processing</option>
+              <option value="shipped" ${order.status === "shipped" ? "selected" : ""}>Shipped</option>
+              <option value="delivered" ${order.status === "delivered" ? "selected" : ""}>Delivered</option>
+            </select>
+            <button onclick="deleteOrder(${order.id})">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      }
+    });
+}
+
+function updateOrderStatus(orderId, status) {
+  fetch(`http://localhost:3000/orders/${orderId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status })
+  }).then(() => loadOrders());
+}
+
+function deleteOrder(orderId) {
+  if (confirm("Are you sure you want to delete this order?")) {
+    fetch(`http://localhost:3000/orders/${orderId}`, {
+      method: "DELETE"
+    }).then(() => loadOrders());
+  }
+}
+loadOrders();
 
 

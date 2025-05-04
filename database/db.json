@@ -38,10 +38,25 @@
       "name": "phone",
       "description": "oppo",
       "price": 100,
-      "status": "approved",
-      "userId": "2"
+      "status": "approved"
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "id": "1",
+      "userId": 2,
+      "items": [
+        {
+          "productId": 1,
+          "quantity": 2
+        },
+        {
+          "productId": 4,
+          "quantity": 1
+        }
+      ],
+      "status": "pending"
+    }
+  ],
   "reviews": []
 }
