@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <form class="register-container">
+        <h2>Create An Account</h2>
+        <div class="form-section">
+            <input type="email"  placeholder="Email" id="email">
+        </div>
+        <div class="form-section">
+            <input type="password" id="password"  placeholder="password">
+        </div>
+        <select class="form-section" id="role">
+            <option value="customer">customer</option>
+            <option value="seller">Seller</option>
+            <option value="admin">Admin</option>
+        </select>
+        <p id="errorMesage"></p>
+        <input type="submit" id="Signup" value="Sign Up">
+        
+        <p>Already Have An Acount! <a href="login.html">Login</a></p>
+    </form>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
