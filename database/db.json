@@ -2,27 +2,33 @@
   "users": [
     {
       "id": "1",
-      "username": "admin",
-      "password": "admin123",
+      "username": "admin@gmail.com",
+      "password": "123456",
       "role": "admin"
     },
     {
       "id": "2",
-      "username": "seller1",
-      "password": "seller123",
+      "username": "seller@gmail.com",
+      "password": "112233",
       "role": "seller"
     },
     {
       "id": "3",
-      "username": "ahmed",
+      "username": "ahmed@gmail.com",
       "password": "123456",
       "role": "customer"
     },
     {
       "id": "4",
-      "username": "mohamed attia",
-      "password": "1234567",
-      "role": "admin"
+      "username": "mohamedattia@gmail.com",
+      "password": "123456",
+      "role": "customer"
+    },
+    {
+      "id": "c34a",
+      "email": "heba@gmail.com",
+      "password": "123456",
+      "role": "customer"
     }
   ],
   "products": [
