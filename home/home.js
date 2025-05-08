@@ -1,0 +1,140 @@
+const user = JSON.parse(localStorage.getItem("user"));
+const logout = document.getElementById("logout");
+const welcomeMessage = document.getElementById("username");
+
+
+// console.log(user)
+document.getElementById("cart-link").addEventListener("click", (e) => {
+  e.preventDefault(); 
+  window.location.href = "../cart/cart.html";
+});
+;
+
+if (!user || user.role !== "customer") {
+  window.location.href = "../auth/login.html";
+}
+
+welcomeMessage.innerText = user.email;
+
+logout.addEventListener("click", () => {
+  localStorage.removeItem("user");
+  window.location.href = "../auth/login.html";
+  console.log("User logged out.");
+});
+
+
+window.addEventListener("load", () => {
+  const grid = document.querySelector(".product-grid");
+
+  fetch("http://localhost:3000/products")
+    .then((res) => res.json())
+    .then((products) => {
+      products.forEach((product) => {
+        const card = document.createElement("div");
+        card.classList.add("product-card");
+
+        card.innerHTML = `
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+          <p><strong>${product.price} EGP</strong></p>
+          <div class="card-options">
+            <button class="btn add-to-cart-btn">Add to Cart</button>
+          </div>`;
+
+        const addToCartBtn = card.querySelector(".add-to-cart-btn");
+
+        addToCartBtn.addEventListener("click", (e) => {
+          fetch("http://localhost:3000/cart")
+            .then((res) => res.json())
+            .then((orders) => {
+              const userOrder = orders.find((order) => order.user.id === user.id);
+
+              //First, IF user HAS Already A Basket..
+              if (userOrder) {
+                const existingProduct = userOrder.products.find(
+                  (p) => p.id === product.id);
+
+                let updatedProducts;
+                // IF User has a basket and product is already inside it.
+                if (existingProduct) {
+                  updatedProducts = userOrder.products.map((p) => {
+                    if (p.id === product.id) {
+                      return { ...p, quantity: (p.quantity || 1) + 1 };
+                    }
+                    return p;
+                  });
+                } else { // IF User has a basket and first product of its type.
+                  updatedProducts = [
+                    ...userOrder.products,
+                    {
+                      id: product.id,
+                      name: product.name,
+                      price: product.price,
+                      description: product.description,
+                      quantity: 1,
+                    },
+                  ];
+                }
+                //update old Basket with products
+                fetch(`http://localhost:3000/cart/${userOrder.id}`, {
+                  method: "PATCH",
+                  headers: {"Content-Type": "application/json"},
+                  body: JSON.stringify({ products: updatedProducts }),
+                  
+                }).then(() => {
+                    console.log(`"${product.name}" updated in cart.`);
+                  })
+                  .catch((err) => console.error("Failed to update order:", err));
+
+                  //IF User Hasn't a Basket, THen Create one For him.
+              } else {
+                fetch("http://localhost:3000/cart", {
+                  method: "POST",
+                  headers: {"Content-Type": "application/json"},
+                  body: JSON.stringify({
+                    user: {
+                      id: user.id,
+                      email: user.email,
+                    },
+                    products: [
+                      {
+                        id: product.id,
+                        name: product.name,
+                        description: product.description,
+                        price: product.price,
+                        quantity: 1,
+                      },
+                    ],
+                  }),
+                })//end fetch..
+                  .then(() => {
+                    console.log(`New cart created and "${product.title}" added.`);
+
+                  })
+                  .catch((err) => console.error("Failed to create new order:", err));
+              }
+
+            }).catch((err) => console.error("Failed to fetch orders:", err));
+        });
+        
+        grid.appendChild(card);
+      });
+
+    }).catch((err) => {
+      console.error("Failed to fetch products:", err);
+      grid.innerHTML = "<p>Unable to load products right now.</p>";
+    });
+
+
+ 
+});
+
+
+
+
+
+
+
+
+
+

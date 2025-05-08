@@ -4,10 +4,10 @@ const LoginForm = this.document.getElementById("loginForm");
 LoginForm.addEventListener("submit", function (e) {
     e.preventDefault();
   
-    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
   
-    fetch(`http://localhost:3000/users?username=${username}&password=${password}`)
+    fetch(`http://localhost:3000/users?email=${email}&password=${password}`)
       .then(res => res.json())
       .then(data => {
         // console.log(data)
@@ -63,36 +63,19 @@ LoginForm.addEventListener("submit", function (e) {
 
 
 
-  
-// const LoginForm = document.getElementById("loginForm");
-// const loginEmail = document.getElementById("username");
-// const loginPassword = document.getElementById("password");
 
-// console.log(loginForm)
-// console.log(loginEmail)
-// console.log(loginPassword)
-// loginForm.addEventListener("submit", (event) => {
-//     event.preventDefault();
-  
-//     fetch("http://localhost:3000/users")
-//       .then((response) => response.json())
-//       .then((data) => {
-//         const user = data.find(
-//           (user) =>
-//             user.username === loginEmail.value.trim() &&
-//             user.password === loginPassword.value.trim()
-//         );
-//         if (user) {
-//           console.log("✅ Login successful:", user);
-//           loginForm.reset();
-//           localStorage.setItem("user", JSON.stringify(user));
-//           alert("OK");
-//           window.location.href = "./../home/home.html";
-//         } else {
-//           alert("Invalid email or password.");
-//         }
-//       }).catch((error) => {
-//         console.error("Error:", error);
-//         alert("There was a problem with login");
-//       });
-// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
