@@ -2,30 +2,36 @@
   "users": [
     {
       "id": "1",
-      "username": "admin@gmail.com",
+      "email": "admin@gmail.com",
       "password": "123456",
       "role": "admin"
     },
     {
       "id": "2",
-      "username": "seller@gmail.com",
+      "email": "seller@gmail.com",
       "password": "112233",
       "role": "seller"
     },
     {
       "id": "3",
-      "username": "ahmed@gmail.com",
+      "email": "ahmed@gmail.com",
       "password": "123456",
       "role": "customer"
     },
     {
-      "id": "4",
-      "username": "mohamedattia@gmail.com",
+      "id": "6f2b",
+      "email": "hend@gmail.com",
       "password": "123456",
       "role": "customer"
     },
     {
-      "id": "c34a",
+      "id": "b373",
+      "email": "ayman@gmail.com",
+      "password": "123456",
+      "role": "seller"
+    },
+    {
+      "id": "9ed7",
       "email": "heba@gmail.com",
       "password": "123456",
       "role": "customer"
@@ -45,6 +51,52 @@
       "description": "oppo",
       "price": 100,
       "status": "approved"
+    },
+    {
+      "id": "6",
+      "name": "electric-fan",
+      "description": "Fresh stand electric fan shabah 18 inch with remote",
+      "price": 2900,
+      "status": "approved"
+    },
+    {
+      "id": "10",
+      "name": "Play-station",
+      "description": "video Games",
+      "price": 28500,
+      "status": "approved"
+    },
+    {
+      "id": "15",
+      "name": "Samsung",
+      "description": "Samsung 50 Inch 4K UHD Smart LED TV - Black - UA50DU7000UXEG [2024 Model]",
+      "price": 19600,
+      "status": "approved"
+    }
+  ],
+  "cart": [
+    {
+      "id": "55",
+      "user": {
+        "id": "9ed7",
+        "email": "heba@gmail.com"
+      },
+      "products": [
+        {
+          "id": "6",
+          "name": "electric-fan",
+          "description": "Fresh stand electric fan shabah 18 inch with remote",
+          "price": 2900,
+          "quantity": 1
+        },
+        {
+          "id": "15",
+          "name": "Samsung",
+          "description": "Samsung 50 Inch 4K UHD Smart LED TV - Black - UA50DU7000UXEG [2024 Model]",
+          "price": 19600,
+          "quantity": 1
+        }
+      ]
     }
   ],
   "orders": [

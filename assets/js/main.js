@@ -35,21 +35,3 @@ form.addEventListener("submit", function (e) {
         })
         .catch(e => console.error("Error checking email:", e));
 });
-
-
-
-// userNameTxt.addEventListener("blur", function()  {
-//     if(!isEmailValid(this.value)){
-//         userNameError.style.visibility = "visible";
-//     } else {
-//         userNameError.style.visibility = "hidden";
-//     }
-// })
-// passwordTxt.addEventListener("blur", function(e) {
-//     if (!isPassValid(this.value)){
-//         passwordError.style.visibility = "visible";
-//     } else {
-//         passwordError.style.visibility = "hidden"; 
-//     }
-
-// })
