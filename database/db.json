@@ -34,6 +34,13 @@
       "email": "mohamedattia@gmail.com",
       "password": "123456",
       "role": "customer"
+    },
+    {
+      "id": "ac7a",
+      "username": "samy",
+      "email": "samy@gmail.com",
+      "password": "123456",
+      "role": "seller"
     }
   ],
   "products": [
@@ -41,7 +48,7 @@
       "id": "126",
       "image": "https://isto.pt/cdn/shop/files/Heavyweight_Black_ef459afb-ff7a-4f9a-b278-9e9621335444.webp?v=1744369639",
       "name": "t-shirt",
-      "description": "kldskds",
+      "description": "Mobaco Men Regular Fit Round Neck T-Shirt ST100",
       "price": 26,
       "status": "approved",
       "sellerid": "2"
@@ -50,7 +57,7 @@
       "id": "6985",
       "image": "https://m.media-amazon.com/images/I/61BMXx4yURL._AC_SL1500_.jpg",
       "name": "LCD",
-      "description": "dsldl",
+      "description": "SAMSUNG T350 Series LF24T350FHNXZA 24 IPS LED FHD Monitor, FreeSync, 4ms (HDMI) - Dark Blue Gray",
       "price": 56852,
       "status": "approved",
       "sellerid": "2"
@@ -67,38 +74,7 @@
     }
   ],
   "orders": [
-    {
-      "id": "1363",
-      "user": {
-        "id": "78e1",
-        "username": "mohamed attia",
-        "email": "mohamedattia@gmail.com",
-        "password": "123456",
-        "role": "customer"
-      },
-      "products": [
-        {
-          "id": "126",
-          "image": "https://isto.pt/cdn/shop/files/Heavyweight_Black_ef459afb-ff7a-4f9a-b278-9e9621335444.webp?v=1744369639",
-          "name": "t-shirt",
-          "price": 26,
-          "description": "kldskds",
-          "quantity": 3,
-          "sellerid": "2"
-        },
-        {
-          "id": "6985",
-          "image": "https://m.media-amazon.com/images/I/61BMXx4yURL._AC_SL1500_.jpg",
-          "name": "LCD",
-          "price": 56852,
-          "description": "dsldl",
-          "quantity": 2,
-          "sellerid": "2"
-        }
-      ],
-      "total": 113782,
-      "status": "pending"
-    }
+    
   ],
   "reviews": []
 }
