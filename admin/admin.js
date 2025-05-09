@@ -20,15 +20,18 @@
             td1.innerText=u.id
             let td2 = document.createElement("td");
             td2.innerText=u.username
+            let td5 = document.createElement("td");
+            td5.innerText=u.email
             let td3= document.createElement("td");
             td3.innerText=u.role
             let td4=document.createElement('td')
             td4.innerHTML=`
-             <button onclick="editUser(${u.id}, '${u.username}', '${u.password}', '${u.role}')">Edit</button>
+             <button onclick="editUser(${u.id}, '${u.username}','${u.email}' ,'${u.password}', '${u.role}')">Edit</button>
             <button onclick="deleteUser(${u.id})">Delete</button> `
 
             row.appendChild(td1)
             row.appendChild(td2)
+            row.appendChild(td5)
             row.appendChild(td3)
             row.appendChild(td4)
 
@@ -45,11 +48,12 @@ let form= document.getElementById("addUserForm");
         e.preventDefault();
       
         let username = document.getElementById("newUsername").value.trim();
+        let useremail = document.getElementById("newUseremail").value.trim();
         let password = document.getElementById("newPassword").value.trim();
         let role = document.getElementById("newRole").value;
         let id=document.getElementById("newUserid").value.trim();;
       
-        if (!username || !password || !role) {
+        if (!username || !password || !role || !useremail) {
           alert("Please fill in all fields.");
           return;
         }
@@ -57,7 +61,7 @@ let form= document.getElementById("addUserForm");
         fetch("http://localhost:3000/users", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id,username, password, role })
+          body: JSON.stringify({ id,username,useremail, password, role })
         })
         .then(res => res.json())
         .then(data => {
@@ -74,15 +78,16 @@ let form= document.getElementById("addUserForm");
 //})
 function deleteUser(id) {
   if (confirm("Are you sure you want to delete this user?")) {
-    fetch(`http://localhost:3000/users/${id}`, { method: "DELETE" })
+    fetch(`http://localhost:3000/users/${encodeURIComponent(id)}`, { method: "DELETE" })
       .then(() => loadUsers());
   }
 }
 
 /////////////////edit user//////////////////////
-function editUser(id, username, password, role) {
+function editUser(id, username,useremail, password, role) {
   document.getElementById("editUserId").value = id;
   document.getElementById("editUsername").value = username;
+  document.getElementById("editUseremail").value = useremail;
   document.getElementById("editPassword").value = password;
   document.getElementById("editRole").value = role;
   document.getElementById("editUserForm").style.display = "block";
@@ -92,13 +97,14 @@ document.getElementById("editUserForm").addEventListener("submit", function (e) 
 
   const id = document.getElementById("editUserId").value;
   const username = document.getElementById("editUsername").value.trim();
+  const useremail = document.getElementById("editUseremail").value.trim();
   const password = document.getElementById("editPassword").value.trim();
   const role = document.getElementById("editRole").value;
 
   fetch(`http://localhost:3000/users/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({id, username, password, role })
+    body: JSON.stringify({id, username,useremail, password, role })
   })
   .then(res => res.json())
   .then(() => {
@@ -226,4 +232,8 @@ function deleteOrder(orderId) {
 }
 loadOrders();
 
+function logout() {
+  localStorage.removeItem("user");
+  window.location.href = "../auth/login.html";
+}
 

@@ -9,14 +9,12 @@
   <link rel="stylesheet" href="cart.css">
 </head>
 <body>
-
-
   <nav>
     <h1>Welcome, <span id="username">Customer</span>!</h1>
     <ul class="links">
-      <li><a href="">Home</a></li>
-      <li><a href="">About</a></li>
-      <li><a href="">Contact</a></li>
+      <li><a href="../home/home.html">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
       <li>
         <a href="" id="cart-link">
           <i title="Cart" style="font-size: 25px;" class="fa-solid fa-cart-shopping"></i>
@@ -31,42 +29,19 @@
   </nav>
   
   <div class="cart-container">
-    <div class="cart-content">
-        
+    <div class="cart-items">
+
     </div>
-    <div class="cart-buttons">
-        <button id="confirmBtn">Confirm Order</button>
-        <button id="clearBtn" style="display: none;">Clear Cart</button>
+    <div class="cart-summary">
+      <h3>Total: <span id="totalPrice">0</span> EGP</h3>
+    </div>
+    <div class="cart-actions">
+      <button id="confirmBtn">Confirm Order</button>
+      <button  id="clearBtn" style="display: none;">Clear Cart</button>
     </div>
   </div>
   
-  <script src="home.js"></script>
+  <script src="cart.js"></script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

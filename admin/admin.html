@@ -8,9 +8,12 @@
 </head>
 <body>
   <h2>Add New User</h2>
+  <button onclick="logout()" style="float: right;">Logout</button>
+
 <form id="addUserForm">
   <input type="text" id="newUserid" placeholder="User ID" required>
   <input type="text" id="newUsername" placeholder="Username" required>
+  <input type="text" id="newUseremail" placeholder="Useremail" required>
   <input type="password" id="newPassword" placeholder="Password" required>
   <select id="newRole" required>
     <option value="">Select Role</option>
@@ -25,6 +28,7 @@
 <form id="editUserForm" style="display:none;">
   <input type="hidden" id="editUserId">
   <input type="text" id="editUsername" placeholder="Username" required>
+  <input type="text" id="editUseremail" placeholder="email" required>
   <input type="password" id="editPassword" placeholder="Password" required>
   <select id="editRole" required>
     <option value="">Select Role</option>
@@ -44,6 +48,7 @@
       <tr>
         <th>ID</th>
         <th>Username</th>
+        <th>Email</th>
         <th>Role</th>
         <th>Actions</th>
       </tr>
@@ -81,7 +86,7 @@
 </table>
 
 
-  <script src="admin-js.js"></script>
+  <script src="admin.js"></script>
 
 </body>
 </html>

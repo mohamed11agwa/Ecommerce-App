@@ -14,7 +14,29 @@ if (!user || user.role !== "customer") {
   window.location.href = "../auth/login.html";
 }
 
-welcomeMessage.innerText = user.email;
+
+function updateWelcomeMessage() {
+  const now = new Date();
+  console.log(now)
+  const hour = now.getHours();
+  let greeting;
+
+  if (hour >= 5 && hour < 12) {
+    greeting = 'Good morning, ';
+  } else if (hour >= 12 && hour < 18) {
+    greeting = 'Good afternoon, ';
+  } else {
+    greeting = 'Good evening, ';
+  }
+
+  welcomeMessage.innerText = greeting + user.username + '!';
+}
+if (user && user.username) {
+  updateWelcomeMessage();
+} else {
+  welcomeUsernameSpan.innerText = 'Welcome, Customer!'
+}
+
 
 logout.addEventListener("click", () => {
   localStorage.removeItem("user");
@@ -29,17 +51,20 @@ window.addEventListener("load", () => {
   fetch("http://localhost:3000/products")
     .then((res) => res.json())
     .then((products) => {
-      products.forEach((product) => {
+      products.filter(product => product.status === "approved")
+      .forEach((product) => {
         const card = document.createElement("div");
         card.classList.add("product-card");
 
         card.innerHTML = `
-          <h3>${product.name}</h3>
-          <p>${product.description}</p>
-          <p><strong>${product.price} EGP</strong></p>
-          <div class="card-options">
+            <img src="${product.image}" alt="${product.name}">
+            <div class = "product-content" >
+              <h3>${product.name}</h3>
+              <p>${product.description}</p>
+              <p><strong>${product.price} EGP</strong></p>
+            </div>
             <button class="btn add-to-cart-btn">Add to Cart</button>
-          </div>`;
+            `;
 
         const addToCartBtn = card.querySelector(".add-to-cart-btn");
 
@@ -68,10 +93,12 @@ window.addEventListener("load", () => {
                     ...userOrder.products,
                     {
                       id: product.id,
+                      image: product.image,
                       name: product.name,
                       price: product.price,
                       description: product.description,
                       quantity: 1,
+                      sellerid: product.sellerid
                     },
                   ];
                 }
@@ -99,10 +126,12 @@ window.addEventListener("load", () => {
                     products: [
                       {
                         id: product.id,
+                        image: product.image,
                         name: product.name,
                         description: product.description,
                         price: product.price,
                         quantity: 1,
+                        sellerid: product.serllerid
                       },
                     ],
                   }),

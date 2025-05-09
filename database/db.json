@@ -2,117 +2,101 @@
   "users": [
     {
       "id": "1",
+      "username": "admin",
       "email": "admin@gmail.com",
       "password": "123456",
       "role": "admin"
     },
     {
       "id": "2",
+      "username": "seller",
       "email": "seller@gmail.com",
       "password": "112233",
       "role": "seller"
     },
     {
       "id": "3",
+      "username": "ahmed",
       "email": "ahmed@gmail.com",
       "password": "123456",
       "role": "customer"
     },
     {
-      "id": "6f2b",
-      "email": "hend@gmail.com",
+      "id": "9ed7",
+      "username": "heba",
+      "email": "heba@gmail.com",
       "password": "123456",
       "role": "customer"
     },
     {
-      "id": "b373",
-      "email": "ayman@gmail.com",
-      "password": "123456",
-      "role": "seller"
-    },
-    {
-      "id": "9ed7",
-      "email": "heba@gmail.com",
+      "id": "78e1",
+      "username": "mohamed attia",
+      "email": "mohamedattia@gmail.com",
       "password": "123456",
       "role": "customer"
     }
   ],
   "products": [
     {
-      "id": "1",
-      "name": "T-shirt",
-      "description": "Cotton T-shirt",
-      "price": 29.99,
-      "status": "approved"
+      "id": "126",
+      "image": "https://isto.pt/cdn/shop/files/Heavyweight_Black_ef459afb-ff7a-4f9a-b278-9e9621335444.webp?v=1744369639",
+      "name": "t-shirt",
+      "description": "kldskds",
+      "price": 26,
+      "status": "approved",
+      "sellerid": "2"
     },
     {
-      "id": "4",
-      "name": "phone",
-      "description": "oppo",
-      "price": 100,
-      "status": "approved"
-    },
-    {
-      "id": "6",
-      "name": "electric-fan",
-      "description": "Fresh stand electric fan shabah 18 inch with remote",
-      "price": 2900,
-      "status": "approved"
-    },
-    {
-      "id": "10",
-      "name": "Play-station",
-      "description": "video Games",
-      "price": 28500,
-      "status": "approved"
-    },
-    {
-      "id": "15",
-      "name": "Samsung",
-      "description": "Samsung 50 Inch 4K UHD Smart LED TV - Black - UA50DU7000UXEG [2024 Model]",
-      "price": 19600,
-      "status": "approved"
+      "id": "6985",
+      "image": "https://m.media-amazon.com/images/I/61BMXx4yURL._AC_SL1500_.jpg",
+      "name": "LCD",
+      "description": "dsldl",
+      "price": 56852,
+      "status": "approved",
+      "sellerid": "2"
     }
   ],
   "cart": [
     {
-      "id": "55",
+      "id": "39e3",
       "user": {
-        "id": "9ed7",
-        "email": "heba@gmail.com"
+        "id": "78e1",
+        "email": "mohamedattia@gmail.com"
       },
-      "products": [
-        {
-          "id": "6",
-          "name": "electric-fan",
-          "description": "Fresh stand electric fan shabah 18 inch with remote",
-          "price": 2900,
-          "quantity": 1
-        },
-        {
-          "id": "15",
-          "name": "Samsung",
-          "description": "Samsung 50 Inch 4K UHD Smart LED TV - Black - UA50DU7000UXEG [2024 Model]",
-          "price": 19600,
-          "quantity": 1
-        }
-      ]
+      "products": []
     }
   ],
   "orders": [
     {
-      "id": "1",
-      "userId": 2,
-      "items": [
+      "id": "1363",
+      "user": {
+        "id": "78e1",
+        "username": "mohamed attia",
+        "email": "mohamedattia@gmail.com",
+        "password": "123456",
+        "role": "customer"
+      },
+      "products": [
         {
-          "productId": 1,
-          "quantity": 2
+          "id": "126",
+          "image": "https://isto.pt/cdn/shop/files/Heavyweight_Black_ef459afb-ff7a-4f9a-b278-9e9621335444.webp?v=1744369639",
+          "name": "t-shirt",
+          "price": 26,
+          "description": "kldskds",
+          "quantity": 3,
+          "sellerid": "2"
         },
         {
-          "productId": 4,
-          "quantity": 1
+          "id": "6985",
+          "image": "https://m.media-amazon.com/images/I/61BMXx4yURL._AC_SL1500_.jpg",
+          "name": "LCD",
+          "price": 56852,
+          "description": "dsldl",
+          "quantity": 2,
+          "sellerid": "2"
         }
       ],
+      "total": 113782,
       "status": "pending"
     }
   ],
