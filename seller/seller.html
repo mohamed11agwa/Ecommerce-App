@@ -12,21 +12,46 @@
 </head>
 <body>
   <h1>Seller Dashboard</h1>
-
+ 
+    <button onclick="logout()" style="float: right; background: #555; color: white; border: none; padding: 5px 10px;">Logout</button>
+  
+  
   <h2>Add New Product</h2>
   <form id="addProductForm">
     <input type="text" id="productID" placeholder="Product Id" required><br>
+    <input type="text" id="image" placeholder="Image URL (e.g. https://...)" required><br>
     <input type="text" id="name" placeholder="Product Name" required><br>
     <textarea id="description" placeholder="Description" required></textarea><br>
     <input type="number" id="price" placeholder="Price" step="0.01" required><br>
     <button type="submit">Add Product</button>
   </form>
+  <h2>Edit Product</h2>
+<form id="editProductForm" style="display: none; margin-top: 20px;">
+  <input type="hidden" id="editProductId">
+
+  <label>Name:</label><br>
+  <input type="text" id="editProductName" required><br>
+
+  <label>Description:</label><br>
+  <textarea id="editProductDescription" required></textarea><br>
+
+  <label>Price:</label><br>
+  <input type="number" id="editProductPrice" step="0.01" required><br>
+
+  <label>Image URL:</label><br>
+  <input type="text" id="editProductImage" required><br>
+
+  <button type="submit">Update Product</button>
+  <button type="button" onclick="cancelProductEdit()">Cancel</button>
+</form>
+<hr>
+
 
   <h2>Your Products</h2>
   <table id="productsTable">
     <thead>
       <tr>
-        <th>ID</th><th>Name</th><th>Description</th><th>Price</th><th>Status</th><th>Actions</th>
+        <th>ID</th><th>Image</th><th>Name</th><th>Description</th><th>Price</th><th>Status</th><th>Actions</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -42,29 +67,38 @@
     const tbody = document.querySelector("#productsTable tbody");
 
     function loadMyProducts() {
-      fetch("http://localhost:3000/products?userId=" + user.id)
-        .then(res => res.json())
-        .then(products => {
-          tbody.innerHTML = "";
-          products.forEach(p => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-              <td>${p.id}</td>
-              <td>${p.name}</td>
-              <td>${p.description}</td>
-              <td>$${p.price}</td>
-              <td>${p.status}</td>
-              <td><button onclick="deleteProduct(${p.id})">Delete</button></td>
-            `;
-            tbody.appendChild(row);
-          });
-        });
-    }
+  fetch(`http://localhost:3000/products?sellerId=${user.id}`)
+    .then(res => res.json())
+    .then(products => {
+      const tbody = document.querySelector("#productsTable tbody");
+      tbody.innerHTML = "";
+
+      products.forEach(p => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${p.id}</td>
+          <td><img src="${p.image || '#'}" width="60" /></td>
+          <td>${p.name}</td>
+          <td>${p.description}</td>
+          <td>$${p.price}</td>
+          <td>${p.status}</td>
+          <td>
+            ${p.status === "pending" ? `
+              <button onclick="editProduct(${p.id})">Edit</button>
+              <button onclick="deleteProduct(${p.id})">Delete</button>
+            ` : ''}
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    });
+}
+
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       let id=document.getElementById("productID").value.trim();
-
+      let image=document.getElementById("image").value.trim();
       let name = document.getElementById("name").value.trim();
       let description = document.getElementById("description").value.trim();
       let price = parseFloat(document.getElementById("price").value);
@@ -74,11 +108,12 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id,
+          image,
           name,
           description,
           price,
           status: "pending", 
-          userId: user.id
+          sellerid: user.id
         })
       })
       .then(() => {
@@ -96,6 +131,56 @@
     }
 
     loadMyProducts();
+    function logout() {
+  localStorage.removeItem("user");
+  window.location.href = "../auth/login.html";
+}
+function editProduct(id) {
+  fetch(`http://localhost:3000/products/${id}`)
+    .then(res => res.json())
+    .then(product => {
+      if (product.status !== "pending") {
+        alert("Only pending products can be edited.");
+        return;
+      }
+
+      document.getElementById("editProductId").value = product.id;
+      document.getElementById("editProductName").value = product.name;
+      document.getElementById("editProductDescription").value = product.description;
+      document.getElementById("editProductPrice").value = product.price;
+      document.getElementById("editProductImage").value = product.image;
+      document.getElementById("editProductForm").style.display = "block";
+    });
+}
+document.getElementById("editProductForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const id = document.getElementById("editProductId").value;
+  const name = document.getElementById("editProductName").value.trim();
+  const description = document.getElementById("editProductDescription").value.trim();
+  const price = parseFloat(document.getElementById("editProductPrice").value);
+  const image = document.getElementById("editProductImage").value.trim();
+
+  fetch(`http://localhost:3000/products/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, description, price, image })
+  })
+  .then(() => {
+    alert("Product updated successfully.");
+    document.getElementById("editProductForm").reset();
+    document.getElementById("editProductForm").style.display = "none";
+    loadMyProducts();
+  });
+});
+function cancelProductEdit() {
+  document.getElementById("editProductForm").reset();
+  document.getElementById("editProductForm").style.display = "none";
+}
+
+
+
+
   </script>
 </body>
 </html>
