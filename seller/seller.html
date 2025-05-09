@@ -67,7 +67,7 @@
     const tbody = document.querySelector("#productsTable tbody");
 
     function loadMyProducts() {
-  fetch(`http://localhost:3000/products?sellerId=${user.id}`)
+  fetch(`http://localhost:3000/products?sellerid=${user.id}`)
     .then(res => res.json())
     .then(products => {
       const tbody = document.querySelector("#productsTable tbody");
