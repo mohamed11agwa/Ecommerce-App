@@ -2,6 +2,20 @@ const user = JSON.parse(localStorage.getItem("user"));
 const logout = document.getElementById("logout");
 const welcomeMessage = document.getElementById("username");
 
+const lineDash = document.querySelector(".line-dash");
+const navLinks = document.querySelector(".links");
+
+lineDash.addEventListener("click", () => {
+    lineDash.classList.toggle("active");
+    navLinks.classList.toggle("active");
+});
+
+navLinks.addEventListener("click", (event) => {
+  if (event.target.tagName === 'A') {
+    lineDash.classList.remove("active");
+    navLinks.classList.remove("active");
+  }
+});
 
 // console.log(user)
 document.getElementById("cart-link").addEventListener("click", (e) => {
@@ -46,6 +60,7 @@ logout.addEventListener("click", () => {
 
 
 window.addEventListener("load", () => {
+  
   const grid = document.querySelector(".product-grid");
 
   fetch("http://localhost:3000/products")
