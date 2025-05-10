@@ -41,6 +41,13 @@
       "email": "samy@gmail.com",
       "password": "123456",
       "role": "seller"
+    },
+    {
+      "id": "6f21",
+      "username": "hassan",
+      "email": "hassan@gmail.com",
+      "password": "123456",
+      "role": "seller"
     }
   ],
   "products": [
@@ -61,11 +68,83 @@
       "price": 56852,
       "status": "approved",
       "sellerid": "2"
+    },
+    {
+      "id": "9875",
+      "image": "https://f.nooncdn.com/p/pzsku/ZDB4FA52E90A15651996FZ/45/_/1735558138/b76efc91-cdcb-4905-9fa5-16dc6b642880.jpg?width=800",
+      "name": "Adidas shoes",
+      "description": "Ultimashow 2.0 Shoes",
+      "price": 4500,
+      "status": "approved",
+      "sellerid": "6f21"
+    },
+    {
+      "id": "8539",
+      "image": "https://f.nooncdn.com/p/pzsku/ZA1821921267EAAE44081Z/45/_/1732475266/e6233717-539d-4a01-9e81-49a9e49867bf.jpg?width=240",
+      "name": "Backpack",
+      "description": "Waterproof Backpack with Modern Design, Durable Material, Large Capacity, and Multiple Compartments - Grey",
+      "price": 750,
+      "status": "approved",
+      "sellerid": "6f21"
+    },
+    {
+      "id": "6485",
+      "image": "https://f.nooncdn.com/p/v1669308191/N42342017A_1.jpg?width=800",
+      "name": "Sony",
+      "description": "Play Station 5 Console (Disc Version) With Extra Wireless Controller",
+      "price": 36000,
+      "status": "approved",
+      "sellerid": "6f21"
+    },
+    {
+      "id": "1435",
+      "image": "https://f.nooncdn.com/p/pnsku/N70106062V/45/_/1726043625/0b07a32d-ddd4-48d4-9352-f38872e9d7bd.jpg?width=240",
+      "name": "Apple",
+      "description": "iPhone 16 Pro Max 256GB Black Titanium 5G With FaceTime - International Version",
+      "price": 80000,
+      "status": "approved",
+      "sellerid": "6f21"
+    },
+    {
+      "id": "5544",
+      "image": "https://f.nooncdn.com/p/v1642144274/N52411041A_1.jpg?width=800",
+      "name": "FUJIFILM",
+      "description": "X-T30 II Mirrorless Camera with 18-55mm Lens",
+      "price": 65000,
+      "status": "approved",
+      "sellerid": "6f21"
+    },
+    {
+      "id": "8855",
+      "image": "https://f.nooncdn.com/p/v1550834313/N21187842A_1.jpg?width=240",
+      "name": "Sandisk",
+      "description": "1TB Extreme Portable SSD -High-speed transfers with up to 1050MB/s read speed - USB Type-C, USB Type-C, USB 3.0, USB 2.0, USB 3.2 Gen 2 - Sdssde61-1T00-G25 1 TB",
+      "price": 5500,
+      "status": "approved",
+      "sellerid": "5"
+    },
+    {
+      "id": "3331",
+      "image": "https://f.nooncdn.com/p/v1548310248/N12407101A_1.jpg?width=240",
+      "name": "BLACK+DECKER",
+      "description": "Steam Mop, Superheated Steam, Microfiber Pad, 30 Sec Heat-Up, 14 Min Runtime, Chemical-Free, Safe for All Sealed Floors, ECO Friendly, 1300 W FSM1605-B5 Grey/White",
+      "price": 7500,
+      "status": "approved",
+      "sellerid": "5"
+    },
+    {
+      "id": "11233",
+      "image": "https://f.nooncdn.com/p/pzsku/Z1027F315B040FD7AE8EEZ/45/_/1731596770/02154d06-8eac-47ce-9a20-243c9c633be8.jpg?width=800",
+      "name": "tennis racket",
+      "description": "ATTITUDE-TOUR 77 Tennis Racquet For Professional Training With Bag 27Inch, BlackxGreen",
+      "price": 2500,
+      "status": "approved",
+      "sellerid": "5"
     }
   ],
   "cart": [
     {
-      "id": "39e3",
+      "id": "78b4",
       "user": {
         "id": "78e1",
         "email": "mohamedattia@gmail.com"
@@ -75,7 +154,30 @@
   ],
   "orders": [
     {
-      "id": "1363",
+      "id": "af89",
+      "user": {
+        "id": "78e1",
+        "username": "mohamed attia",
+        "email": "mohamedattia@gmail.com",
+        "password": "123456",
+        "role": "customer"
+      },
+      "products": [
+        {
+          "id": "6985",
+          "image": "https://m.media-amazon.com/images/I/61BMXx4yURL._AC_SL1500_.jpg",
+          "name": "LCD",
+          "price": 56852,
+          "description": "SAMSUNG T350 Series LF24T350FHNXZA 24 IPS LED FHD Monitor, FreeSync, 4ms (HDMI) - Dark Blue Gray",
+          "quantity": 3,
+          "sellerid": "2"
+        }
+      ],
+      "total": 170556,
+      "status": "confirmed"
+    },
+    {
+      "id": "9374",
       "user": {
         "id": "78e1",
         "username": "mohamed attia",
@@ -89,8 +191,8 @@
           "image": "https://isto.pt/cdn/shop/files/Heavyweight_Black_ef459afb-ff7a-4f9a-b278-9e9621335444.webp?v=1744369639",
           "name": "t-shirt",
           "price": 26,
-          "description": "kldskds",
-          "quantity": 3,
+          "description": "Mobaco Men Regular Fit Round Neck T-Shirt ST100",
+          "quantity": 2,
           "sellerid": "2"
         },
         {
@@ -98,12 +200,12 @@
           "image": "https://m.media-amazon.com/images/I/61BMXx4yURL._AC_SL1500_.jpg",
           "name": "LCD",
           "price": 56852,
-          "description": "dsldl",
-          "quantity": 2,
+          "description": "SAMSUNG T350 Series LF24T350FHNXZA 24 IPS LED FHD Monitor, FreeSync, 4ms (HDMI) - Dark Blue Gray",
+          "quantity": 1,
           "sellerid": "2"
         }
       ],
-      "total": 113782,
+      "total": 56904,
       "status": "pending"
     }
   ],
