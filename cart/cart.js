@@ -1,16 +1,20 @@
-document.addEventListener("DOMContentLoaded", function () {
+window.onload = function () {
     const cartContainer = document.querySelector(".cart-items");
     const totalPriceSpan = document.getElementById("totalPrice");
     const confirmBtn = document.getElementById("confirmBtn");
     const clearBtn = document.getElementById("clearBtn");
-  
+    const logout  = document.querySelector("#logout");
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
       alert("You must be logged in");
       window.location.href = "../auth/login.html";
       return;
     }
-  
+    logout.addEventListener("click", () => {
+      localStorage.removeItem("user");
+      window.location.href = "../auth/login.html";
+      console.log("User logged out.");
+    });
     document.getElementById("username").textContent = user.username;
   
     fetch("http://localhost:3000/cart")
@@ -148,5 +152,5 @@ document.addEventListener("DOMContentLoaded", function () {
       }).catch(error => {
         console.error("Error loading cart:", error);
       });
-  });
+};
   
