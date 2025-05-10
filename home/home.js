@@ -1,6 +1,3 @@
-const user = JSON.parse(localStorage.getItem("user"));
-const logout = document.getElementById("logout");
-const welcomeMessage = document.getElementById("username");
 /** Start NavBar in samll Screens */
 const lineDash = document.querySelector(".line-dash");
 const navLinks = document.querySelector(".links");
@@ -15,18 +12,39 @@ navLinks.addEventListener("click", (event) => {
   }
 });/** End NavBar in samll Screens */
 
-
-// console.log(user)
-document.getElementById("cart-link").addEventListener("click", (e) => {
-  e.preventDefault(); 
-  window.location.href = "../cart/cart.html";
-});
-;
-
-if (!user || user.role !== "customer") {
-  window.location.href = "../auth/login.html";
-}
+// if (!user || user.role !== "customer") {
+//   window.location.href = "../auth/login.html";
+// }
 window.addEventListener("load", () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const logout = document.getElementById("logout");
+  const login = document.getElementById("login");
+  const welcomeMessage = document.getElementById("username");
+  const cart = document.getElementById("cart-link");
+  const ordersLink = document.getElementById("orders-link");
+ 
+
+  if (!user) {
+    logout.style.display = "none";
+    cart.style.display = "none";
+    ordersLink.style.display = "none";
+    login.style.display = "block";
+    login.style.padding = "10px";
+  } else {
+    logout.style.display= "block";
+    cart.style.display = "block";
+    ordersLink.style.display = "block";
+    login.style.display = "none";
+  }
+  login.addEventListener("click", function () {
+    window.location.href = "./../auth/auth.html";
+  });
+    // console.log(user)
+  cart.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    window.location.href = "../cart/cart.html";
+  });
+
   /**Welcome Message */
   function updateWelcomeMessage() {
   const now = new Date();
@@ -47,7 +65,7 @@ window.addEventListener("load", () => {
   if (user && user.username) {
     updateWelcomeMessage();
   } else {
-    welcomeUsernameSpan.innerText = 'Welcome, Customer!'
+    welcomeMessage.innerText = 'Welcome, Customer!'
   }
 
   logout.addEventListener("click", () => {
@@ -82,6 +100,9 @@ window.addEventListener("load", () => {
           const addToCartBtn = card.querySelector(".add-to-cart-btn");
 
           addToCartBtn.addEventListener("click", (e) => {
+            if(!user){
+              alert("Please log in to able to add products to cart.")
+            }
           fetch("http://localhost:3000/cart")
             .then((res) => res.json())
             .then((orders) => {

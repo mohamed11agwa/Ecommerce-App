@@ -1,6 +1,13 @@
 
-const LoginForm = this.document.getElementById("loginForm");
+window.addEventListener("load", () => {
+  const navbar = document.querySelector("nav");
+  const content = document.querySelector(".content");
 
+  const navHeight = navbar.offsetHeight;
+  content.style.height = `calc(100vh - ${navHeight}px)`;
+});
+
+const LoginForm = this.document.getElementById("loginForm");
 LoginForm.addEventListener("submit", function (e) {
     e.preventDefault();
   
