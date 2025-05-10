@@ -1,21 +1,20 @@
 const user = JSON.parse(localStorage.getItem("user"));
 const logout = document.getElementById("logout");
 const welcomeMessage = document.getElementById("username");
-
+/** Start NavBar in samll Screens */
 const lineDash = document.querySelector(".line-dash");
 const navLinks = document.querySelector(".links");
-
 lineDash.addEventListener("click", () => {
     lineDash.classList.toggle("active");
     navLinks.classList.toggle("active");
 });
-
 navLinks.addEventListener("click", (event) => {
   if (event.target.tagName === 'A') {
     lineDash.classList.remove("active");
     navLinks.classList.remove("active");
   }
-});
+});/** End NavBar in samll Screens */
+
 
 // console.log(user)
 document.getElementById("cart-link").addEventListener("click", (e) => {
@@ -27,9 +26,9 @@ document.getElementById("cart-link").addEventListener("click", (e) => {
 if (!user || user.role !== "customer") {
   window.location.href = "../auth/login.html";
 }
-
-
-function updateWelcomeMessage() {
+window.addEventListener("load", () => {
+  /**Welcome Message */
+  function updateWelcomeMessage() {
   const now = new Date();
   console.log(now)
   const hour = now.getHours();
@@ -44,46 +43,45 @@ function updateWelcomeMessage() {
   }
 
   welcomeMessage.innerText = greeting + user.username + '!';
-}
-if (user && user.username) {
-  updateWelcomeMessage();
-} else {
-  welcomeUsernameSpan.innerText = 'Welcome, Customer!'
-}
+  }
+  if (user && user.username) {
+    updateWelcomeMessage();
+  } else {
+    welcomeUsernameSpan.innerText = 'Welcome, Customer!'
+  }
 
-
-logout.addEventListener("click", () => {
-  localStorage.removeItem("user");
-  window.location.href = "../auth/login.html";
-  console.log("User logged out.");
-});
-
-
-window.addEventListener("load", () => {
-  
+  logout.addEventListener("click", () => {
+    localStorage.removeItem("user");
+    window.location.href = "../auth/login.html";
+    console.log("User logged out.");
+  });
+  //fetch products to display in layout
+  const searchInput = document.querySelector(".search-container input");
   const grid = document.querySelector(".product-grid");
-
+  let allproducts = [];
   fetch("http://localhost:3000/products")
     .then((res) => res.json())
-    .then((products) => {
-      products.filter(product => product.status === "approved")
-      .forEach((product) => {
-        const card = document.createElement("div");
-        card.classList.add("product-card");
+    .then((products) => {      
+      function renderProducts(products) {
+        grid.innerHTML = ""; //clear old products
 
-        card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <div class = "product-content" >
-              <h3>${product.name}</h3>
-              <p>${product.description}</p>
-              <p><strong>${product.price} EGP</strong></p>
-            </div>
-            <button class="btn add-to-cart-btn">Add to Cart</button>
-            `;
+        products.forEach((product) => {
+          const card = document.createElement("div");
+          card.classList.add("product-card");
 
-        const addToCartBtn = card.querySelector(".add-to-cart-btn");
+          card.innerHTML = `
+              <img src="${product.image}" alt="${product.name}">
+              <div class = "product-content" >
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <p><strong>${product.price} EGP</strong></p>
+              </div>
+              <button class="btn add-to-cart-btn">Add to Cart</button>
+          `;
 
-        addToCartBtn.addEventListener("click", (e) => {
+          const addToCartBtn = card.querySelector(".add-to-cart-btn");
+
+          addToCartBtn.addEventListener("click", (e) => {
           fetch("http://localhost:3000/cart")
             .then((res) => res.json())
             .then((orders) => {
@@ -150,7 +148,7 @@ window.addEventListener("load", () => {
                       },
                     ],
                   }),
-                })//end fetch..
+                })
                   .then(() => {
                     console.log(`New cart created and "${product.title}" added.`);
 
@@ -160,8 +158,20 @@ window.addEventListener("load", () => {
 
             }).catch((err) => console.error("Failed to fetch orders:", err));
         });
-        
-        grid.appendChild(card);
+
+          grid.appendChild(card);
+        });//end of foreach
+      }//end of function
+
+      allproducts = products.filter(product => product.status === "approved");
+      renderProducts(allproducts);
+      //Search Input
+      searchInput.addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        const filteredProducts = allproducts.filter(product =>
+          product.name.toLowerCase().includes(query) || product.description.toLowerCase().includes(query)
+        );
+        renderProducts(filteredProducts);
       });
 
     }).catch((err) => {

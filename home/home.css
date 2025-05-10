@@ -138,15 +138,34 @@ ul li > a:hover {
 }
 /************End Navbar*****************/
 
+/**Search input**/
+.search-container{
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+.search-container input {
+    padding: 12px;
+    width: 25%;
+    border-radius: 10px;
+    outline: 0;
+}
+/**End Search Input*/
+/******Start Layout**********/
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* Default to three columns on larger screens */
     gap: 20px;
     padding: 20px;
 }
-  
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Exactly three columns on larger screens */
+    gap: 20px;
+    padding: 20px;
+}
 .product-card {
-    width: 400px;
+    width: 400px; /* Default width for larger screens */
     background-color: #fff;
     border-radius: 12px;
     overflow: hidden;
@@ -157,7 +176,46 @@ ul li > a:hover {
     display: flex;
     flex-direction: column;
 }
-  
+/* Media query for screens smaller than or equal to 992px (breakpoint) */
+@media (max-width: 1300px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+    .product-card {
+        width: calc(100% - 30px); 
+        margin: 15px; 
+    }
+}
+
+/* Media query for screens smaller than or equal to 992px (breakpoint) */
+@media (max-width: 992px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    .product-card {
+        width: calc(100% - 30px); 
+        margin: 15px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr; 
+    }
+    .product-card {
+        width: calc(100% - 30px); 
+        margin: 15px 0; 
+    }
+}
+
+/* Media query for even smaller screens (phones) */
+@media (max-width: 480px) {
+    .product-card {
+        width: calc(100% - 20px); 
+        margin: 10px 0; 
+    }
+}
+/**************End of layout*********************/
 .product-card:hover {
     transform: translateY(-5px);
 }
