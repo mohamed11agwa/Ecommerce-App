@@ -86,7 +86,11 @@ window.addEventListener("load", () => {
         products.forEach((product) => {
           const card = document.createElement("div");
           card.classList.add("product-card");
+          card.addEventListener("click", (e) => {
+             localStorage.setItem("productId", product.id);
+             window.location.href = `../product-details/product-details.html?id=${product.id}`;
 
+          });
           card.innerHTML = `
               <img src="${product.image}" alt="${product.name}">
               <div class = "product-content" >
@@ -100,6 +104,7 @@ window.addEventListener("load", () => {
           const addToCartBtn = card.querySelector(".add-to-cart-btn");
 
           addToCartBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
             if(!user){
               alert("Please log in to able to add products to cart.")
             }
